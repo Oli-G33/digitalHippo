@@ -9,8 +9,10 @@ import {
   AuthCredentialsValidator,
   TAuthCredentialValidator
 } from '@/lib/validators/account-credentials-validator';
+import { trpc } from '@/trpc/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
+import { Span } from 'next/dist/trace';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
@@ -23,7 +25,11 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator)
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialValidator) => {};
+  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({});
+
+  const onSubmit = ({ email, password }: TAuthCredentialValidator) => {
+    mutate({ email, password });
+  };
 
   return (
     <>
@@ -55,6 +61,9 @@ const Page = () => {
                     })}
                     placeholder="you@example.com"
                   />
+                  {errors.email && (
+                    <span className="text-red-500">{errors.email.message}</span>
+                  )}
                 </div>
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="password">Password</Label>
@@ -64,7 +73,13 @@ const Page = () => {
                       'focus-visible:ring-red-500': errors.password
                     })}
                     placeholder="Password"
+                    type="password"
                   />
+                  {errors.password && (
+                    <span className="text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
                 </div>
                 <Button>Sign up</Button>
               </div>
