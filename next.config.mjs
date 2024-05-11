@@ -7,6 +7,12 @@ const nextConfig = {
         pathname: '**',
         port: '3000',
         protocol: 'http'
+      },
+      {
+        hostname: 'digitalhippo-production-6a12.up.railway.app',
+        pathname: '**',
+        port: '',
+        protocol: 'https'
       }
     ]
   }
