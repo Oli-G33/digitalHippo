@@ -40,6 +40,8 @@ const start = async () => {
     }
   });
 
+  console.log('Testing');
+
   if (process.env.NEXT_BUILD) {
     app.listen(PORT, async () => {
       payload.logger.info('Next.js is building for production');
