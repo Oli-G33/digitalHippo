@@ -73,16 +73,15 @@ const Navbar = async () => {
                       />
                     </div>
                   )}
-
-                  <div className="ml-4 flow-root lg:ml-6">
-                    <Cart />
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </MaxWidthWrapper>
       </header>
+      <div className="fixed right-10 md:right-16 top-5">
+        <Cart />
+      </div>
     </div>
   );
 };
