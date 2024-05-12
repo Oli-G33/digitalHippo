@@ -1,5 +1,4 @@
 import PaymentStatus from '@/components/PaymentStatus';
-import { Button } from '@/components/ui/Button';
 import { PRODUCT_CATEGORIES } from '@/config';
 import { getPayloadClient } from '@/get-payload';
 import { getServerSideUser } from '@/lib/payload-utils';
