@@ -1,13 +1,14 @@
 import { z } from 'zod';
 import { authRouter } from './auth-router';
 import { publicProcedure, router } from './trpc';
-import { QueryValidator } from '../lib/validators/Query-Validator';
 import { getPayloadClient } from '../get-payload';
 import { paymentRouter } from './payment-router';
+import { QueryValidator } from '@/lib/validators/Query-Validator';
 
 export const appRouter = router({
   auth: authRouter,
   payment: paymentRouter,
+
   getInfiniteProducts: publicProcedure
     .input(
       z.object({
@@ -18,7 +19,7 @@ export const appRouter = router({
     )
     .query(async ({ input }) => {
       const { query, cursor } = input;
-      const { limit, sort, ...queryOpts } = query;
+      const { sort, limit, ...queryOpts } = query;
 
       const payload = await getPayloadClient();
 
@@ -49,7 +50,11 @@ export const appRouter = router({
         limit,
         page
       });
-      return { items, nextPage: hasNextPage ? nextPage : null };
+
+      return {
+        items,
+        nextPage: hasNextPage ? nextPage : null
+      };
     })
 });
 
