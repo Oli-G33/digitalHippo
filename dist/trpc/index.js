@@ -62,9 +62,9 @@ exports.appRouter = void 0;
 var zod_1 = require("zod");
 var auth_router_1 = require("./auth-router");
 var trpc_1 = require("./trpc");
-var Query_Validator_1 = require("../lib/validators/Query-Validator");
 var get_payload_1 = require("../get-payload");
 var payment_router_1 = require("./payment-router");
+var Query_Validator_1 = require("@/lib/validators/Query-Validator");
 exports.appRouter = (0, trpc_1.router)({
     auth: auth_router_1.authRouter,
     payment: payment_router_1.paymentRouter,
@@ -75,13 +75,13 @@ exports.appRouter = (0, trpc_1.router)({
         query: Query_Validator_1.QueryValidator
     }))
         .query(function (_a) { return __awaiter(void 0, [_a], void 0, function (_b) {
-        var query, cursor, limit, sort, queryOpts, payload, parsedQueryOpts, page, _c, items, hasNextPage, nextPage;
+        var query, cursor, sort, limit, queryOpts, payload, parsedQueryOpts, page, _c, items, hasNextPage, nextPage;
         var input = _b.input;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     query = input.query, cursor = input.cursor;
-                    limit = query.limit, sort = query.sort, queryOpts = __rest(query, ["limit", "sort"]);
+                    sort = query.sort, limit = query.limit, queryOpts = __rest(query, ["sort", "limit"]);
                     return [4 /*yield*/, (0, get_payload_1.getPayloadClient)()];
                 case 1:
                     payload = _d.sent();
@@ -105,7 +105,10 @@ exports.appRouter = (0, trpc_1.router)({
                         })];
                 case 2:
                     _c = _d.sent(), items = _c.docs, hasNextPage = _c.hasNextPage, nextPage = _c.nextPage;
-                    return [2 /*return*/, { items: items, nextPage: hasNextPage ? nextPage : null }];
+                    return [2 /*return*/, {
+                            items: items,
+                            nextPage: hasNextPage ? nextPage : null
+                        }];
             }
         });
     }); })
