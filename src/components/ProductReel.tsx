@@ -4,7 +4,7 @@ import { Product } from '@/payload-types';
 import { trpc } from '@/trpc/client';
 import Link from 'next/link';
 import ProductListing from './ProductListing';
-import { TQueryValidator } from '@/lib/validators/Query-Validator';
+import { TQueryValidator } from '../lib/validators/Query-Validator';
 
 interface ProductReelProps {
   title: string;
