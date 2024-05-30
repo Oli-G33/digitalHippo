@@ -49,7 +49,6 @@ const Page = () => {
 
       if (origin) {
         router.push(`/${origin}`);
-        router.refresh();
         return;
       }
 
